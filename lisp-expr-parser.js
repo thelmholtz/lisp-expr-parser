@@ -1,11 +1,5 @@
-function nextChar(s){
-    if (s.length > 1)
-        return {value: s[0], remainder: s.slice(1)}
-    else
-        return {value: s[0], remainder: []}
-}
-
 function tokenize(input){
+
     let c
     let tokens = []
     let token = ''
@@ -43,6 +37,7 @@ function tokenize(input){
 
 
 function parse(tokens){
+
     let i = 0
 
     function walkDeep(){
@@ -90,17 +85,6 @@ function parse(tokens){
     return ast
 }
 
-console.log(tokenize("a"))
-console.log(parse(tokenize("a")))
-
-console.log(tokenize("(asd 1 3)"))
-console.log(JSON.stringify(parse(tokenize("(asd 1 3)"))))
-
-console.log(tokenize("(asd 1 (1 2 ()))"))
-console.log(JSON.stringify(parse(tokenize("(asd 1 (1 2 ()))"))))
-
-validExpressions = ["(() (()()()) ())", "(1 2 ((1 2 ((1 2)) )) 3)", "(a b c)", "(the smushing (pumpkings potatoes zuchinis) () )"]
-
-
-validExpressions.map((expr) => console.log(tokenize(expr)))
-validExpressions.map((expr) => console.log(JSON.stringify(parse(tokenize(expr)))))
+module.exports = function(input){
+    return parse(tokenize(input))
+} 
